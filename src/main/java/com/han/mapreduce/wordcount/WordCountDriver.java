@@ -36,8 +36,10 @@ public class WordCountDriver {
         job.setOutputValueClass(IntWritable.class);
 
         //6 设置输入路径
-        FileInputFormat.setInputPaths(job,new Path("C:\\Users\\86181\\Desktop\\test"));
-        FileOutputFormat.setOutputPath(job,new Path("C:\\Users\\86181\\Desktop\\output"));
+       // FileInputFormat.setInputPaths(job,new Path("E:\\cloud\\hello.txt"));
+        //FileOutputFormat.setOutputPath(job,new Path("E:\\cloud\\output1"));
+        FileInputFormat.setInputPaths(job,new Path(args[0]));
+        FileOutputFormat.setOutputPath(job,new Path(args[1]));
 
         //7 提交job alt+enter 抛出异常
         boolean result = job.waitForCompletion(true);
