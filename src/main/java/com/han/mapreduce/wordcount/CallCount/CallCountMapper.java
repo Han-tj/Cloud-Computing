@@ -1,4 +1,4 @@
-package com.han.mapreduce.wordcount;
+package com.han.mapreduce.wordcount.CallCount;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -18,8 +18,8 @@ public class CallCountMapper extends Mapper<LongWritable, Text,Text, IntWritable
         String line = value.toString();
 
         String[] words = line.split("\t");
-        //电话号码+日期
-        String K=words[1]+" "+words[0];
+        //电话号码
+        String K=words[1];
         //System.out.println(K);
 
         outK.set(K);

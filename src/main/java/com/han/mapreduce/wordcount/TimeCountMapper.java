@@ -1,5 +1,6 @@
 package com.han.mapreduce.wordcount;
 
+import com.han.mapreduce.wordcount.TimeCount.Times;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -10,6 +11,8 @@ import java.io.IOException;
 public class TimeCountMapper  extends Mapper<LongWritable,Text,Text,IntWritable>{
     private Text outK = new Text();
     private IntWritable outV = new IntWritable(0);
+    private Times times=new Times();
+    int timeset=0;
     //比较大小
     //a<=b return true
     public boolean lessThan(String start,String end){
@@ -41,24 +44,6 @@ public class TimeCountMapper  extends Mapper<LongWritable,Text,Text,IntWritable>
         else return true;
     }
 
-    //减法
-    public int minus(String a,String b){
-        String[] al=a.split(":");
-        String[] bl=b.split(":");
-        int value=0;
-        int[] ail=new int[3];
-        int[] bil=new int[3];
-        for(int j=0;j<3;j++){
-            ail[j]=Integer.parseInt(al[j]);
-            bil[j]=Integer.parseInt(bl[j]);
-        }
-        if(lessThan(a,b)){
-           value=ail[0]*60*60+ail[1]*60+ail[2]-bil[0]*60*60-bil[1]*60-bil[2];
-        }
-        else value=-ail[0]*60*60-ail[1]*60-ail[2]+bil[0]*60*60+bil[1]*60+bil[2];
-        return value;
-    }
-
     @Override
     protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context) throws IOException, InterruptedException {
 
@@ -87,8 +72,11 @@ public class TimeCountMapper  extends Mapper<LongWritable,Text,Text,IntWritable>
            if(lessThan(words[9],words[10])){
                //起止在同一时间段
                if(startset==endset){
-                   outK.set(words[1]+" "+Integer.toString(startset));
-                   outV.set(Integer.parseInt(words[11]));
+                   timeset=startset;
+                   outK.set(words[1]);
+                   if(startset==1){
+                       times.setTime1(Integer.parseInt(words[11]));
+                   }
                    context.write(outK,outV);
                }
                //起止不在同一时间段
@@ -109,7 +97,6 @@ public class TimeCountMapper  extends Mapper<LongWritable,Text,Text,IntWritable>
                    outK.set(words[1]+" "+Integer.toString(endset));
                    outV.set(v2);
                    context.write(outK,outV);
-
 
                }
            }
