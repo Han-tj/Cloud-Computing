@@ -1,5 +1,6 @@
 package com.han.mapreduce.wordcount;
 
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -36,13 +37,13 @@ public class WordCountDriver {
         job.setOutputValueClass(IntWritable.class);
 
         //6 设置输入路径
-        FileInputFormat.setInputPaths(job,new Path("C:\\Users\\86181\\Desktop\\test"));
-        FileOutputFormat.setOutputPath(job,new Path("C:\\Users\\86181\\Desktop\\output"));
+        FileInputFormat.setInputPaths(job, new Path("C:\\Users\\86181\\Desktop\\test"));
+        FileOutputFormat.setOutputPath(job, new Path("C:\\Users\\86181\\Desktop\\output"));
 
         //7 提交job alt+enter 抛出异常
         boolean result = job.waitForCompletion(true);
 
-        System.exit(result?0:1);
+        System.exit(result ? 0 : 1);
 
 
     }
