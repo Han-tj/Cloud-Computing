@@ -9,11 +9,11 @@ import java.io.IOException;
 
 public class OperatorsCountMapper extends Mapper<LongWritable, Text,Text,Operators> {
     private Text outK = new Text();
-    private Operators outV = new Operators();
 
     @Override
     protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, Operators>.Context context) throws IOException, InterruptedException {
         String line = value.toString();
+        Operators outV = new Operators();
 
         String[] words = line.split("\t");
         //通话类型

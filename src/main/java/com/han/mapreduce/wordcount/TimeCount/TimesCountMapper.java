@@ -155,12 +155,9 @@ public class TimesCountMapper extends Mapper<LongWritable, Text,Text,Times> {
                 times=setTimes(timeset,v2);
                 context.write(outK,times);
             }
-
-
         }
         //终止时间为0，计算时长
         else{
-
             int part1=startset*3*60*60-st[0]*60*60-st[1]*60-st[2];
             //没有跨越时间段
             if(part1>Integer.parseInt(words[11])){

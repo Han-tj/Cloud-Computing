@@ -34,7 +34,7 @@ public class OperatorsCountDriver {
 
         //6 设置输入路径
         FileInputFormat.setInputPaths(job,new Path("E:\\cloud\\data.txt"));
-        FileOutputFormat.setOutputPath(job,new Path("E:\\cloud\\OperatorsCount"));
+        FileOutputFormat.setOutputPath(job,new Path("E:\\cloud\\OperatorsCount20"));
         //FileInputFormat.setInputPaths(job,new Path(args[0]));
         //FileOutputFormat.setOutputPath(job,new Path(args[1]));
 

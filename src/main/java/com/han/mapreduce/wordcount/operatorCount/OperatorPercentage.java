@@ -11,6 +11,21 @@ public class OperatorPercentage implements Writable {
     private double yidong;
     private double liantong;
 
+
+    @Override
+    public void write(DataOutput dataOutput) throws IOException {
+        dataOutput.writeDouble(dianxin);
+        dataOutput.writeDouble(yidong);
+        dataOutput.writeDouble(liantong);
+    }
+
+    @Override
+    public void readFields(DataInput dataInput) throws IOException {
+        this.dianxin=dataInput.readDouble();
+        this.yidong=dataInput.readDouble();
+        this.liantong=dataInput.readDouble();
+
+    }
     public double getYidong() {
         return yidong;
     }
@@ -44,18 +59,4 @@ public class OperatorPercentage implements Writable {
     }
 
 
-    @Override
-    public void write(DataOutput dataOutput) throws IOException {
-        dataOutput.writeDouble(dianxin);
-        dataOutput.writeDouble(yidong);
-        dataOutput.writeDouble(liantong);
-    }
-
-    @Override
-    public void readFields(DataInput dataInput) throws IOException {
-        this.dianxin=dataInput.readDouble();
-        this.yidong=dataInput.readDouble();
-        this.liantong=dataInput.readDouble();
-
-    }
 }

@@ -38,9 +38,14 @@ public class TimesCountDriver {
 
         //6 设置输入路径
         FileInputFormat.setInputPaths(job,new Path("E:\\cloud\\data.txt"));
-        FileOutputFormat.setOutputPath(job,new Path("E:\\cloud\\TimesCount"));
+        FileOutputFormat.setOutputPath(job,new Path("E:\\cloud\\TimesCount5"));
         //FileInputFormat.setInputPaths(job,new Path(args[0]));
         //FileOutputFormat.setOutputPath(job,new Path(args[1]));
+        conf.set("map.output.field.ignoreseparator", "true");
+        conf.set("map.output.field.separator",",");
+
+        conf.set("mapred.textoutputformat.ignoreseparator", "true");
+        conf.set("mapred.textoutputformat.separator",",");
 
 
         boolean result = job.waitForCompletion(true);
